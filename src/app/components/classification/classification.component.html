@@ -1,6 +1,5 @@
-<!-- <div *ngIf="classification"> -->
 <div>
-    <p *ngFor="let potentialSpoof of potentialSpoofs">
+    <p *ngFor="let potentialSpoof of limitedPotentialSpoofs">
         <label class="character-label">{{ potentialSpoof }}: </label><input class="character-input" type="text" />
     </p>
 

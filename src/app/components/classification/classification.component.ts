@@ -10,22 +10,34 @@ import { ApiService } from '../../services/api.service';
     providers: [ ApiService ]
 })
 export class ClassificationComponent implements OnInit {
-    @Input() classification: Classification
     basicCharacters: String[];
     potentialSpoofs: String[];
+    limitedPotentialSpoofs: String[];
+    classifyCount: String;
 
     constructor(private apiService: ApiService) {}
 
     ngOnInit() {
+        // find how many characters this visitor would like to classify
+        let classifyCountInput = document.getElementById('classification-count') as HTMLInputElement;
+        this.classifyCount = classifyCountInput.value;
+
+        // get the basic characters from the API
         this.basicCharacters = this.apiService.getBasicCharacters()
             .subscribe(basicCharacters => this.basicCharacters = basicCharacters);
 
+        // get the potential spoofs from the API and narrow down the potential spoofs to the number which the user specified
         this.potentialSpoofs = this.apiService.getCharacters()
-            .subscribe(nonBasicCharacters => this.potentialSpoofs = nonBasicCharacters);
+            .subscribe(potentialSpoofs => this.narrowPotentialSpoofs(potentialSpoofs));
+    }
+
+    narrowPotentialSpoofs(potentialSpoofs: any) {
+        /* Select the potential spoofs which will be shown to the visitor. */
+        this.limitedPotentialSpoofs = this.potentialSpoofs.splice(0, Number(this.classifyCount));
     }
 
     clicked() {
-        // pull the data from the input boxes
+        /* Pull the content from the form and post it to the feed */
         var formData = [];
 
         var characterLabels = document.getElementsByClassName("character-label");
