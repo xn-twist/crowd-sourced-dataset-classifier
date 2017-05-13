@@ -23,14 +23,15 @@ export class ClassificationComponent {
         var characterInputs = document.getElementsByClassName("character-input");
 
         for (var i = 0; i < characterInputs.length; ++i) {
-            // get the value of the input field
-              formData.push({
-                  "character": characterInputs[i].value,
-                  "spoof": characterLabels[i].innerHTML.trimEnd().replace(":", "")
-              });
-        }
+            // treat the current input field as an HTMLInputElement so we can get the value of it later
+            let thisInputField = characterInputs[i] as HTMLInputElement;
 
-        console.log("Form data collected: ", formData);
+            // get the value of the input field
+            formData.push({
+                "character": thisInputField.value,
+                "spoof": characterLabels[i].innerHTML.replace(": ", "")
+            });
+        }
 
         var angularApp = this;
 
