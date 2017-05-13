@@ -1,8 +1,0 @@
-{
-    "data": {
-        "baseCharacters": ["a", "b", "c"],
-        "unmappedCharacters": ["d", "e", "f"]
-    },
-    "id": 1,
-    "name": "First Classification"
-}
