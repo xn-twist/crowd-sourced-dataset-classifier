@@ -1,0 +1,9 @@
+<div *ngIf="classification">
+    {{classification.name}}
+
+    <p *ngFor="let unmappedChar of classification.data.unmappedCharacters">
+        <label class="character-label">{{ unmappedChar }}: </label><input class="character-input" type="text" />
+    </p>
+
+    <button (click)="clicked()">Click Me!</button>
+</div>
