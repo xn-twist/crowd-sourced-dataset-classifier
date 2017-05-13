@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Classification } from './classification.model';
-import { ApiData } from './apiData.model';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -10,10 +9,20 @@ import { ApiService } from '../../services/api.service';
     templateUrl: 'classification.component.html',
     providers: [ ApiService ]
 })
-export class ClassificationComponent {
+export class ClassificationComponent implements OnInit {
     @Input() classification: Classification
+    basicCharacters: String[];
+    potentialSpoofs: String[];
 
     constructor(private apiService: ApiService) {}
+
+    ngOnInit() {
+        this.basicCharacters = this.apiService.getBasicCharacters()
+            .subscribe(basicCharacters => this.basicCharacters = basicCharacters);
+
+        this.potentialSpoofs = this.apiService.getCharacters()
+            .subscribe(nonBasicCharacters => this.potentialSpoofs = nonBasicCharacters);
+    }
 
     clicked() {
         // pull the data from the input boxes
