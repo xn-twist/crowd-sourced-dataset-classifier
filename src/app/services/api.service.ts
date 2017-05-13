@@ -19,7 +19,7 @@ export class ApiService {
         let headers = new Headers({ 'Content-Type': 'application/json'});
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.patch(this.baseApiPath, updatedData, options)
+        return this.http.post(this.baseApiPath, updatedData, options)
           .map(response => response.json());
     }
 }
