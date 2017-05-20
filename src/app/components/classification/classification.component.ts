@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Classification } from './classification.model';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -14,8 +13,12 @@ export class ClassificationComponent implements OnInit {
     potentialSpoofs: String[];
     limitedPotentialSpoofs: String[];
     classifyCount: String;
+    submitting: Boolean;
 
-    constructor(private apiService: ApiService) {}
+    constructor(private apiService: ApiService) {
+        this.submitting = false;
+        this.potentialSpoofs = [];
+    }
 
     ngOnInit() {
         // find how many characters this visitor would like to classify
@@ -23,21 +26,30 @@ export class ClassificationComponent implements OnInit {
         this.classifyCount = classifyCountInput.value;
 
         // get the basic characters from the API
-        this.basicCharacters = this.apiService.getBasicCharacters()
-            .subscribe(basicCharacters => this.basicCharacters = basicCharacters);
+        this.apiService.getBasicCharacters()
+          .subscribe(basicCharacters => this.basicCharacters = basicCharacters);
 
         // get the potential spoofs from the API and narrow down the potential spoofs to the number which the user specified
-        this.potentialSpoofs = this.apiService.getCharacters()
-            .subscribe(potentialSpoofs => this.narrowPotentialSpoofs(potentialSpoofs));
+        this.apiService.getCharacters()
+          .subscribe(potentialSpoofs => this.narrowPotentialSpoofs(potentialSpoofs));
     }
 
     narrowPotentialSpoofs(potentialSpoofs: any) {
         /* Select the potential spoofs which will be shown to the visitor. */
+        // get the potential spoof character from the entry in the API
+        for (var i = 0; i < potentialSpoofs._items.length; i++) {
+            if (potentialSpoofs._items[i].potential_spoof != undefined) {
+                this.potentialSpoofs.push(potentialSpoofs._items[i].potential_spoof)
+            }
+        }
+
         this.limitedPotentialSpoofs = this.potentialSpoofs.splice(0, Number(this.classifyCount));
     }
 
-    clicked() {
-        /* Pull the content from the form and post it to the feed */
+    submitData() {
+        /* Pull the content from the form and post it to the feed. */
+        this.submitting = true;
+
         var formData = [];
 
         var characterLabels = document.getElementsByClassName("character-label");
@@ -60,5 +72,15 @@ export class ClassificationComponent implements OnInit {
             angularApp.apiService.sendData(characterData)
                 .subscribe((arg: any) => console.log("Response: ", arg));
         });
+    }
+
+    classifyAgain() {
+        /* Reload the page so the user can start classifying again. */
+        location.reload();
+    }
+
+    noClassifyAgain() {
+        /* Display a message for the user. */
+
     }
 }

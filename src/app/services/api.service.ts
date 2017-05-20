@@ -14,18 +14,12 @@ export class ApiService {
         /*Get the basic characters from the API*/
         return this.http.get(this.baseApiPath + "basic_characters")
           .map(response => response.json());
-
-        // the line below is only for testing purposes
-        // return ["a", "b", "c"];
     }
 
     getCharacters() {
         /*Get all, non-basic characters from the API*/
         return this.http.get(this.baseApiPath + "characters")
           .map(response => response.json());
-
-        // the line below is only for testing purposes
-        // return ["d", "e", "f"];
     }
 
     sendData(updatedData: any) {

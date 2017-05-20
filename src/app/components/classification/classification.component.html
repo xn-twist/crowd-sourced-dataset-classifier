@@ -3,5 +3,15 @@
         <label class="character-label">{{ potentialSpoof }}: </label><input class="character-input" type="text" />
     </p>
 
-    <button (click)="clicked()">Click Me!</button>
+    <button (click)="submitData()">Submit!</button>
+
+    <div id="again" *ngIf="submitting">
+        Thanks for the contribution!
+
+        Would you like to submit again?
+        <div class="button-group">
+            <a class="primary button" (click)="classifyAgain()">Yes!</a>
+            <a class="secondary button" (click)="noClassifyAgain()">No thanks.</a>
+        </div>
+    </div>
 </div>
