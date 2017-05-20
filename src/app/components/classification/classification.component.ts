@@ -43,7 +43,14 @@ export class ClassificationComponent implements OnInit {
             }
         }
 
-        this.limitedPotentialSpoofs = this.potentialSpoofs.splice(0, Number(this.classifyCount));
+        // handle the desired classification count as a number
+        var classifyCount = Number(this.classifyCount);
+
+        // create a random number from which we will provide characters
+        var seed = Math.floor(Math.random() * (this.potentialSpoofs.length - classifyCount));
+
+        // create a short list of characters that the user can classify
+        this.limitedPotentialSpoofs = this.potentialSpoofs.splice(seed, classifyCount);
     }
 
     submitData() {
@@ -59,11 +66,13 @@ export class ClassificationComponent implements OnInit {
             // treat the current input field as an HTMLInputElement so we can get the value of it later
             let thisInputField = characterInputs[i] as HTMLInputElement;
 
-            // get the value of the input field
-            formData.push({
-                "character": thisInputField.value,
-                "spoof": characterLabels[i].innerHTML.replace(": ", "")
-            });
+            if (thisInputField.value != "") {
+                // get the value of the input field
+                formData.push({
+                    "character": thisInputField.value,
+                    "spoof": characterLabels[i].innerHTML.replace(": ", "")
+                });
+            }
         }
 
         var angularApp = this;
