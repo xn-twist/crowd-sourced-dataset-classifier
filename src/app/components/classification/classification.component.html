@@ -1,17 +1,29 @@
 <div>
-    <p *ngFor="let potentialSpoof of limitedPotentialSpoofs">
-        <label class="character-label">{{ potentialSpoof }}: </label><input class="character-input" type="text" />
-    </p>
+    <div class="small-7 medium-7 large-7 float-center">
+        <div class="row small-12 medium-6 large-6" *ngFor="let potentialSpoof of limitedPotentialSpoofs">
+            <div class="columns small-1 medium-1 large-2">
+                <label class="character-label">{{ potentialSpoof }}: </label>
+            </div>
+            <div class="columns small-11 medium-11 large-10">
+                <input class="character-input" type="text" />
+            </div>
+        </div>
 
-    <button (click)="submitData()">Submit!</button>
-
-    <div id="again" *ngIf="submitting">
-        Thanks for the contribution!
-
-        Would you like to submit again?
-        <div class="button-group">
-            <a class="primary button" (click)="classifyAgain()">Yes!</a>
-            <a class="secondary button" (click)="noClassifyAgain()">No thanks.</a>
+        <div class="row">
+            <button type="button" class="button float-center" (click)="submitData()" style="margin: 0 auto;">Submit!</button>
         </div>
     </div>
+
+    <br><br>
+
+    <div id="again" class="small-12 medium-12 large-12 float-center" *ngIf="submitting">
+        <h3>Thanks for your contribution!</h3>
+
+        <div class="button-group-option" data-grouptype="OR">
+          <a href="#" class="button success radius">Classify some more data</a>
+          <a href="https://xn-twist.github.io/" class="button primary radius">Learn more about xn-twist</a>
+        </div>
+    </div>
+
+    <br><br>
 </div>

@@ -3,3 +3,87 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
+
+/* Styling for the "want to ride again?" button group. */
+.button-group-option {
+  position: relative;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.button-group-option::before, .button-group-option::after {
+  display: table;
+  content: ' ';
+  -webkit-flex-basis: 0;
+      -ms-flex-preferred-size: 0;
+          flex-basis: 0;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+.button-group-option::after {
+  clear: both;
+}
+
+.button-group-option .button {
+  margin: 0;
+  margin-right: 1px;
+  margin-bottom: 1px;
+  font-size: 0.9rem;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+}
+
+.button-group-option .button:last-child {
+  margin-right: 0;
+}
+
+.button-group-option .button {
+  -webkit-flex: 1 1 0px;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0px;
+}
+
+.button-group-option .button {
+  font-size: 1.125rem;
+}
+
+.button-group-option:before {
+  content: attr(data-grouptype);
+  z-index: 1;
+  color: #8a8a8a;
+  display: inline-block;
+  font-size: 1rem;
+  padding: 0.25em;
+  border-radius: 5000px;
+  background: #fefefe;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.button-group-option .button + .button {
+  margin-left: 0.35rem;
+}
+
+/* styling for input field where user selects how many characters he/she would like to classify (home.component.ts). */
+#classification-count {
+  text-align: center;
+}

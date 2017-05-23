@@ -9,15 +9,18 @@
 
     <div id="classifications">
         <!-- <div id="initial-selection" *ngIf="!classifying"> -->
-        <div id="initial-selection">
-            <br/>
-            <label>How many characters would you like to classify?</label>
-            <br/>
-            <input id="classification-count" type="number" value=10>
-            <br/>
-            <button (click)="startClassifying()">Start protecting the internet ></button>
-            <br/>
+        <div id="initial-selection" class="card-divider small-3 medium-3 large-3 float-center">
+            <form>
+                <label class="float-center">
+                    How many characters would you like to classify?
+                    <input id="classification-count" type="number" value="10" min="1" max="100" required pattern="integer">
+                </label>
+
+                <button type="button" class="button float-center" (click)="startClassifying()">Start protecting the internet</button>
+            </form>
         </div>
+
+        <hr>
 
         <div id="character-list" *ngIf="classifying">
             <classification></classification>
