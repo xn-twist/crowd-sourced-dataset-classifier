@@ -83,7 +83,57 @@ h1 {
   margin-left: 0.35rem;
 }
 
-/* styling for input field where user selects how many characters he/she would like to classify (home.component.ts). */
+/* Styling for input field where user selects how many characters he/she would like to classify (home.component.html). */
 #classification-count {
   text-align: center;
+}
+
+/* Styling for the welcome title (home.component.html). */
+#title {
+  text-align: center;
+}
+
+#content {
+  text-align: center;
+}
+
+/* Styling for alert messages (classification.component.html). */
+.alert-callout-subtle {
+  width: 100%;
+  background: #e6e6e6;
+  color: #8a8a8a;
+  border: 0;
+  border-left: 0.3125rem solid #8a8a8a;
+  box-shadow: 0 5px 8px -6px rgba(0, 0, 0, 0.2);
+}
+
+.alert-callout-subtle.success {
+  background: #e6e6e6;
+  color: #8a8a8a;
+  border-left: 0.3125rem solid #3adb76;
+}
+
+.alert-callout-subtle.alert {
+  background: #e6e6e6;
+  color: #8a8a8a;
+  border-left: 0.3125rem solid #cc4b37;
+}
+
+.alert-callout-subtle.warning {
+  background: #e6e6e6;
+  color: #8a8a8a;
+  border-left: 0.3125rem solid #ffae00;
+}
+
+.alert-callout-subtle .close-button {
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.alert-callout-subtle.radius {
+  border-radius: 0.7rem;
 }

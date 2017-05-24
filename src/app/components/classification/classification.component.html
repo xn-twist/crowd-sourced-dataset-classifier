@@ -1,29 +1,37 @@
-<div>
+<!-- Alert if the API is not accessible. -->
+<div data-closable class="callout small-6 medium-6 large-6 float-center alert-callout-subtle warning radius" *ngIf=apiUnresponsive>
+    <strong>Unable to reach API.</strong>The author of this project will get it back up and running shortly. Please try again in a bit...
+    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+        <span aria-hidden="true">⊗</span>
+    </button>
+</div>
+
+<!-- If the API is accessible, show characters to the user. -->
+<div *ngIf=showInputs>
     <div class="small-7 medium-7 large-7 float-center">
         <div class="row small-12 medium-6 large-6" *ngFor="let potentialSpoof of limitedPotentialSpoofs">
             <div class="columns small-1 medium-1 large-2">
                 <label class="character-label">{{ potentialSpoof }}: </label>
             </div>
             <div class="columns small-11 medium-11 large-10">
-                <input class="character-input" type="text" />
+                <input class="character-input" type="text" maxlength="1"/>
             </div>
         </div>
 
-        <div class="row">
-            <button type="button" class="button float-center" (click)="submitData()" style="margin: 0 auto;">Submit!</button>
+        <div class="small-7 medium-7 large-7 float-center">
+            <button type="button" class="button" (click)="submitData()" style="margin: 0 auto;">Submit!</button>
         </div>
     </div>
-
-    <br><br>
-
-    <div id="again" class="small-12 medium-12 large-12 float-center" *ngIf="submitting">
-        <h3>Thanks for your contribution!</h3>
-
-        <div class="button-group-option" data-grouptype="OR">
-          <a href="#" class="button success radius">Classify some more data</a>
-          <a href="https://xn-twist.github.io/" class="button primary radius">Learn more about xn-twist</a>
-        </div>
-    </div>
-
-    <br><br>
 </div>
+
+<div id="again" class="small-12 medium-12 large-12 float-center" *ngIf="submitting">
+    <br><br>
+    <h3>Thanks for your contribution!</h3>
+
+    <div class="button-group-option" data-grouptype="OR">
+      <button type="button" class="button success radius" (click)="classifyAgain()">Classify some more data</button>
+      <a href="https://xn-twist.github.io/" class="button primary radius">Learn more about xn-twist</a>
+    </div>
+</div>
+
+<br>

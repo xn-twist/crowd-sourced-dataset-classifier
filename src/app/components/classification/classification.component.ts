@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
 import { ApiService } from '../../services/api.service';
 
@@ -14,10 +14,13 @@ export class ClassificationComponent implements OnInit {
     limitedPotentialSpoofs: String[];
     classifyCount: String;
     submitting: Boolean;
+    apiUnresponsive: Boolean;
+    showInputs: Boolean;
 
     constructor(private apiService: ApiService) {
         this.submitting = false;
         this.potentialSpoofs = [];
+        this.showInputs = false;
     }
 
     ngOnInit() {
@@ -27,11 +30,17 @@ export class ClassificationComponent implements OnInit {
 
         // get the basic characters from the API
         this.apiService.getBasicCharacters()
-          .subscribe(basicCharacters => this.basicCharacters = basicCharacters);
+          .subscribe(
+              basicCharacters => this.basicCharacters = basicCharacters,
+              (err) => this.apiUnresponsive = true
+          );
 
         // get the potential spoofs from the API and narrow down the potential spoofs to the number which the user specified
         this.apiService.getCharacters()
-          .subscribe(potentialSpoofs => this.narrowPotentialSpoofs(potentialSpoofs));
+          .subscribe(
+              potentialSpoofs => this.narrowPotentialSpoofs(potentialSpoofs),
+              (err) => this.apiUnresponsive = true
+          );
     }
 
     narrowPotentialSpoofs(potentialSpoofs: any) {
@@ -51,12 +60,12 @@ export class ClassificationComponent implements OnInit {
 
         // create a short list of characters that the user can classify
         this.limitedPotentialSpoofs = this.potentialSpoofs.splice(seed, classifyCount);
+
+        this.showInputs = true;
     }
 
     submitData() {
         /* Pull the content from the form and post it to the feed. */
-        this.submitting = true;
-
         var formData = [];
 
         var characterLabels = document.getElementsByClassName("character-label");
@@ -81,10 +90,18 @@ export class ClassificationComponent implements OnInit {
             angularApp.apiService.sendData(characterData)
                 .subscribe((arg: any) => console.log("Response: ", arg));
         });
+
+        // show the next-step buttons
+        this.submitting = true;
+
+        // hide the input boxes
+        this.showInputs = false;
     }
 
     classifyAgain() {
         /* Reload the page so the user can start classifying again. */
+        // TODO: implement the line below so that the welcome title is updated
+        // this.welcomeTitleChange.emit("Thanks for the help!");
         location.reload();
     }
 

@@ -7,13 +7,19 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
     classifying: Boolean;
+    welcomeTitle: String;
 
     constructor() {
         this.classifying = false;
+        this.welcomeTitle = "Welcome!";
     }
 
     startClassifying() {
         /* Display the classifier */
         this.classifying = true;
+    }
+
+    ping() {
+        console.log("here");
     }
 }
