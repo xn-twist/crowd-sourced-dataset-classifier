@@ -9,13 +9,13 @@ import { ApiService } from '../../services/api.service';
     providers: [ ApiService ]
 })
 export class ClassificationComponent implements OnInit {
-    basicCharacters: String[];
-    potentialSpoofs: String[];
-    limitedPotentialSpoofs: String[];
-    classifyCount: String;
-    submitting: Boolean;
-    apiUnresponsive: Boolean;
-    showInputs: Boolean;
+    basicCharacters: string[];
+    potentialSpoofs: string[];
+    limitedPotentialSpoofs: string[];
+    classifyCount: string;
+    submitting: boolean;
+    apiUnresponsive: boolean;
+    showInputs: boolean;
     @Input() welcomeTitle: string;
     @Output() welcomeTitleChange = new EventEmitter();
 
