@@ -109,6 +109,7 @@ export class ClassificationComponent implements OnInit {
 
     classifyAgain() {
         /* Reload the component so the user can start classifying again. */
+        // update the welcome title at the top of the home component
         this.welcomeTitleChange.emit("You rock! Thanks for the help.");
 
         // restart the component by reinitializing variables and calling the ngOnInit() function again
