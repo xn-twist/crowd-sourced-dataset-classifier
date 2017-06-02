@@ -25,7 +25,7 @@
         <hr>
 
         <div id="character-list" *ngIf="classifying">
-            <classification></classification>
+            <classification [(welcomeTitle)]="welcomeTitle" (welcomeTitleChange)="updateWelcomeTitle($event)"></classification>
         </div>
     </div>
 </div>

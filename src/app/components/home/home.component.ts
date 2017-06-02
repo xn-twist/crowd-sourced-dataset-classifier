@@ -15,11 +15,11 @@ export class HomeComponent {
     }
 
     startClassifying() {
-        /* Display the classifier */
+        /* Display the classifier. */
         this.classifying = true;
     }
 
-    ping() {
-        console.log("here");
+    updateWelcomeTitle(welcomeTitleEvent:string) {
+        /* This function receives the callback when the welcomeTitle is updated from the child component (../classification/classification.component.ts). */
     }
 }

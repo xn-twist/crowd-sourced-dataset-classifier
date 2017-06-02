@@ -16,14 +16,23 @@ export class ClassificationComponent implements OnInit {
     submitting: Boolean;
     apiUnresponsive: Boolean;
     showInputs: Boolean;
+    @Input() welcomeTitle: string;
+    @Output() welcomeTitleChange = new EventEmitter();
 
     constructor(private apiService: ApiService) {
+        // initialize the variables
+        this.init();
+    }
+
+    init() {
+        /* Initialize the variables used in this component. */
         this.submitting = false;
         this.potentialSpoofs = [];
         this.showInputs = false;
     }
 
     ngOnInit() {
+        console.log("here");
         // find how many characters this visitor would like to classify
         let classifyCountInput = document.getElementById('classification-count') as HTMLInputElement;
         this.classifyCount = classifyCountInput.value;
@@ -47,7 +56,7 @@ export class ClassificationComponent implements OnInit {
         /* Select the potential spoofs which will be shown to the visitor. */
         // get the potential spoof character from the entry in the API
         for (var i = 0; i < potentialSpoofs._items.length; i++) {
-            if (potentialSpoofs._items[i].potential_spoof != undefined) {
+            if (potentialSpoofs._items[i].potential_spoof !== undefined) {
                 this.potentialSpoofs.push(potentialSpoofs._items[i].potential_spoof)
             }
         }
@@ -99,14 +108,11 @@ export class ClassificationComponent implements OnInit {
     }
 
     classifyAgain() {
-        /* Reload the page so the user can start classifying again. */
-        // TODO: implement the line below so that the welcome title is updated
-        // this.welcomeTitleChange.emit("Thanks for the help!");
-        location.reload();
-    }
+        /* Reload the component so the user can start classifying again. */
+        this.welcomeTitleChange.emit("You rock! Thanks for the help.");
 
-    noClassifyAgain() {
-        /* Display a message for the user. */
-
+        // restart the component by reinitializing variables and calling the ngOnInit() function again
+        this.init();
+        this.ngOnInit();
     }
 }
