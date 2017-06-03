@@ -18,7 +18,7 @@ export class ApiService {
 
     getCharacters() {
         /*Get all, non-basic characters from the API*/
-        return this.http.get(this.baseApiPath + "characters")
+        return this.http.get(this.baseApiPath + "non_basic_characters")
           .map(response => response.json());
     }
 
