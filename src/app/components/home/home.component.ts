@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ClassificationComponent } from '../classification/classification.component';
 
 @Component({
     moduleId: module.id,
@@ -7,7 +8,10 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
     classifying: boolean;
+    classifiedCharactersCount: number;
     welcomeTitle: string;
+    // this provides access to the classification component which is a child of this component
+    @ViewChild(ClassificationComponent) classifier: ClassificationComponent;
 
     constructor() {
         this.classifying = false;
@@ -16,7 +20,15 @@ export class HomeComponent {
 
     startClassifying() {
         /* Display the classifier. */
-        this.classifying = true;
+        // if we are already classifying and the user hits the main, submit button again, restart the child, classifier component
+        if (this.classifying) {
+            this.classifier.init();
+            this.classifier.ngOnInit();
+        }
+        // if we are not already classifying, by all means... start!
+        else {
+            this.classifying = true;
+        }
     }
 
     updateWelcomeTitle(welcomeTitleEvent:string) {

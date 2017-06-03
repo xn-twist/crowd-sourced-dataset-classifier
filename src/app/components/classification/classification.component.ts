@@ -16,6 +16,7 @@ export class ClassificationComponent implements OnInit {
     submitting: boolean;
     apiUnresponsive: boolean;
     showInputs: boolean;
+    // the two variables below handle the input/output for the welcome message
     @Input() welcomeTitle: string;
     @Output() welcomeTitleChange = new EventEmitter();
 
@@ -32,7 +33,6 @@ export class ClassificationComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log("here");
         // find how many characters this visitor would like to classify
         let classifyCountInput = document.getElementById('classification-count') as HTMLInputElement;
         this.classifyCount = classifyCountInput.value;
