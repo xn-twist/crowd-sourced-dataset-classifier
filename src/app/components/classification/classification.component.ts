@@ -116,4 +116,19 @@ export class ClassificationComponent implements OnInit {
         this.init();
         this.ngOnInit();
     }
+
+    removeCharacter(character:string) {
+        /* Remove the given character from the UI and suggest it for deprecation in the API. */
+        for (var i = this.limitedPotentialSpoofs.length - 1; i >= 0; i--) {
+            if (this.limitedPotentialSpoofs[i] == character) {
+                // remove the character from the list of potential spoofs in the UI
+                this.limitedPotentialSpoofs.splice(i, 1);
+
+                // post the character to the API
+                this.apiService.suggestCharacterForDeprectation({'character': character})
+                    .subscribe((arg: any) => console.log("Response: ", arg));
+                break;
+            }
+        }
+    }
 }
