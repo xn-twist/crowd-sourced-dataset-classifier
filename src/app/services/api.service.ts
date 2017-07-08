@@ -7,7 +7,7 @@ export class ApiService {
     baseApiPath: string;
 
     constructor(private http: Http) {
-        this.baseApiPath = "http://miceandmen.tk:5000/";
+        this.baseApiPath = "http://xntwist.tk:5000/";
     }
 
     getBasicCharacters() {
