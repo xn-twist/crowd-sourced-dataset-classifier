@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+
 import { ClassificationComponent } from '../classification/classification.component';
 
 @Component({
