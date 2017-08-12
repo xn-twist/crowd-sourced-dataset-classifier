@@ -57,7 +57,7 @@ export class ClassificationComponent implements OnInit {
         // get the potential spoof character from the entry in the API
         for (let i = 0; i < potentialSpoofs._items.length; i++) {
             if (potentialSpoofs._items[i].potential_spoof !== undefined) {
-                this.potentialSpoofs.push(potentialSpoofs._items[i].potential_spoof)
+                this.potentialSpoofs.push(potentialSpoofs._items[i].potential_spoof);
             }
         }
 
@@ -81,7 +81,7 @@ export class ClassificationComponent implements OnInit {
             // treat the current input field as an HTMLInputElement so we can get the value of it later
             let thisInputField = characterInputs[i] as HTMLInputElement;
 
-            if (thisInputField.value != '') {
+            if (thisInputField.value !== '') {
                 // get the value of the input field
                 formData.push({
                     'character': thisInputField.value,
@@ -116,13 +116,13 @@ export class ClassificationComponent implements OnInit {
         this.init(this.classifyCount);
     }
 
-    removeCharacter(character:string) {
+    removeCharacter(character: string) {
         /* Remove the given character from the UI and suggest it for deprecation in the API. */
         // keep track of the number of characters this user has classified
         this.totalClassifiedCharactersCount += 1;
 
         for (let i = this.limitedPotentialSpoofs.length - 1; i >= 0; i--) {
-            if (this.limitedPotentialSpoofs[i] == character) {
+            if (this.limitedPotentialSpoofs[i] === character) {
                 // remove the character from the list of potential spoofs in the UI
                 this.limitedPotentialSpoofs.splice(i, 1);
 

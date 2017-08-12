@@ -25,14 +25,12 @@ export class HomeComponent {
         // if we are already classifying and the user hits the main, submit button again, restart the child, classifier component
         if (this.classifying) {
             this.classifier.init(this.charsToClassify);
-        }
-        // if we are not already classifying, by all means... start!
-        else {
+        } else {  // if we are not already classifying, by all means... start!
             this.classifying = true;
         }
     }
 
-    updateWelcomeTitle(welcomeTitleEvent:string) {
+    updateWelcomeTitle(welcomeTitleEvent: string) {
         /* This function receives the callback when the welcomeTitle is updated from the child component (../classification/classification.component.ts). */
     }
 }
