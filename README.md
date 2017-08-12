@@ -1,12 +1,12 @@
 # XN-Twist Crowd-Sourced Classification System
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/564fcdb652254bb6be8fd8ba4fcde81b)](https://www.codacy.com/app/fhightower/crowd-sourced-dataset-creator?utm_source=github.com&utm_medium=referral&utm_content=xn-twist/crowd-sourced-dataset-creator&utm_campaign=badger)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/564fcdb652254bb6be8fd8ba4fcde81b)](https://www.codacy.com/app/fhightower/crowd-sourced-dataset-creator)
 
 *Because 30 seconds can make the internet a much safer place.*
 
 The goal of this project is to make it quick and easy to create datasets for [XN-Twist](https://github.com/fhightower/xn_twist). These datasets can then be used to give organizations around the world (many of which cannot afford large security teams) more visibility into potential threats.
 
-![XN-Twist Layout](.images/xn-twist-layout.png?raw=true "XN-Twist Layout")
+![XN-Twist Layout](_images/xn-twist-layout.png?raw=true "XN-Twist Layout")
 
 ## How do I get started making the world a safer place?
 
