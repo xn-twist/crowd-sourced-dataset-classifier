@@ -12,6 +12,7 @@ export class ClassificationComponent implements OnInit {
     basicCharacters: string[];
     potentialSpoofs: string[];
     limitedPotentialSpoofs: string[];
+    totalClassifiedCharactersCount: number = 0;
     classifyCount: number;
     submitting: boolean;
     apiUnresponsive: boolean;
@@ -36,7 +37,6 @@ export class ClassificationComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log("classifyCount", this.classifyCount);
         // get the basic characters from the API
         this.apiService.getBasicCharacters()
           .subscribe(
@@ -50,11 +50,6 @@ export class ClassificationComponent implements OnInit {
               potentialSpoofs => this.narrowPotentialSpoofs(potentialSpoofs),
               (err) => this.apiUnresponsive = true
           );
-    }
-
-    setClassifyCount(charsToClassify: number) {
-        console.log("setting classifyCount", charsToClassify);
-        this.classifyCount = charsToClassify;
     }
 
     narrowPotentialSpoofs(potentialSpoofs: any) {
@@ -97,6 +92,9 @@ export class ClassificationComponent implements OnInit {
 
         var angularApp = this;
 
+        // keep track of the number of characters this user has classified
+        this.totalClassifiedCharactersCount += formData.length;
+
         formData.forEach(function(characterData) {
             angularApp.apiService.sendData(characterData)
                 .subscribe((arg: any) => console.log("Response: ", arg));
@@ -120,6 +118,9 @@ export class ClassificationComponent implements OnInit {
 
     removeCharacter(character:string) {
         /* Remove the given character from the UI and suggest it for deprecation in the API. */
+        // keep track of the number of characters this user has classified
+        this.totalClassifiedCharactersCount += 1;
+
         for (var i = this.limitedPotentialSpoofs.length - 1; i >= 0; i--) {
             if (this.limitedPotentialSpoofs[i] == character) {
                 // remove the character from the list of potential spoofs in the UI
