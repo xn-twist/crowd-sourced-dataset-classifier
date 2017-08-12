@@ -9,7 +9,8 @@ import { ClassificationComponent } from '../classification/classification.compon
 })
 export class HomeComponent {
     classifying: boolean;
-    classifiedCharactersCount: number;
+    totalClassifiedCharactersCount: number;
+    charsToClassify: number;
     welcomeTitle: string;
     // this provides access to the classification component which is a child of this component
     @ViewChild(ClassificationComponent) classifier: ClassificationComponent;
@@ -17,14 +18,15 @@ export class HomeComponent {
     constructor() {
         this.classifying = false;
         this.welcomeTitle = "Welcome!";
+        this.charsToClassify = 10;
     }
 
     startClassifying() {
         /* Display the classifier. */
         // if we are already classifying and the user hits the main, submit button again, restart the child, classifier component
         if (this.classifying) {
-            this.classifier.init();
-            this.classifier.ngOnInit();
+            console.log("this.charsToClassify", this.charsToClassify)
+            this.classifier.init(this.charsToClassify);
         }
         // if we are not already classifying, by all means... start!
         else {

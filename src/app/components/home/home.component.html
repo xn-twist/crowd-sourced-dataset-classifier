@@ -10,19 +10,21 @@
     </div>
 
     <div id="classifications">
-        <!-- <div id="initial-selection" *ngIf="!classifying"> -->
-        <div id="initial-selection" class="card-divider small-3 medium-3 large-3 float-center">
-            <form>
-                <label>
-                    How many characters would you like to classify?
-                    <input id="classification-count" type="number" value="10" min="1" max="50" required pattern="integer">
-                </label>
+        <div *ngIf="classifying != true">
+            <div id="initial-selection" class="card-divider small-3 medium-3 large-3 float-center">
+                <form>
+                    <label>
+                        How many characters would you like to classify?
+                        <input id="classification-count" (ngModel)="charsToClassify" type="number" value="10" min="1" max="50" required pattern="integer">
+                    </label>
 
-                <button type="button" class="button float-center" (click)="startClassifying()">Start protecting the internet</button>
-            </form>
+                    <button type="button" class="button float-center" (click)="startClassifying()">Start protecting the internet</button>
+                </form>
+            </div>
+
+            <hr>
+
         </div>
-
-        <hr>
 
         <div id="character-list" *ngIf="classifying">
             <classification [(welcomeTitle)]="welcomeTitle" (welcomeTitleChange)="updateWelcomeTitle($event)"></classification>

@@ -12,7 +12,7 @@ export class ClassificationComponent implements OnInit {
     basicCharacters: string[];
     potentialSpoofs: string[];
     limitedPotentialSpoofs: string[];
-    classifyCount: string;
+    classifyCount: number;
     submitting: boolean;
     apiUnresponsive: boolean;
     showInputs: boolean;
@@ -22,21 +22,21 @@ export class ClassificationComponent implements OnInit {
 
     constructor(private apiService: ApiService) {
         // initialize the variables
-        this.init();
+        this.init(10);
     }
 
-    init() {
-        /* Initialize the variables used in this component. */
+    init(charsToClassify: number) {
+        /* Initialize the variables used in this component. This function exists outside of the constructor function because it is called by the `classifyAgain` function if the user decides to classify some more data. */
         this.submitting = false;
         this.potentialSpoofs = [];
         this.showInputs = false;
+        this.classifyCount = charsToClassify;
+
+        this.ngOnInit();
     }
 
     ngOnInit() {
-        // find how many characters this visitor would like to classify
-        let classifyCountInput = document.getElementById('classification-count') as HTMLInputElement;
-        this.classifyCount = classifyCountInput.value;
-
+        console.log("classifyCount", this.classifyCount);
         // get the basic characters from the API
         this.apiService.getBasicCharacters()
           .subscribe(
@@ -52,6 +52,11 @@ export class ClassificationComponent implements OnInit {
           );
     }
 
+    setClassifyCount(charsToClassify: number) {
+        console.log("setting classifyCount", charsToClassify);
+        this.classifyCount = charsToClassify;
+    }
+
     narrowPotentialSpoofs(potentialSpoofs: any) {
         /* Select the potential spoofs which will be shown to the visitor. */
         // get the potential spoof character from the entry in the API
@@ -61,14 +66,11 @@ export class ClassificationComponent implements OnInit {
             }
         }
 
-        // handle the desired classification count as a number
-        var classifyCount = Number(this.classifyCount);
-
         // create a random number from which we will provide characters
-        var seed = Math.floor(Math.random() * (this.potentialSpoofs.length - classifyCount));
+        var seed = Math.floor(Math.random() * (this.potentialSpoofs.length - this.classifyCount));
 
         // create a short list of characters that the user can classify
-        this.limitedPotentialSpoofs = this.potentialSpoofs.splice(seed, classifyCount);
+        this.limitedPotentialSpoofs = this.potentialSpoofs.splice(seed, this.classifyCount);
 
         this.showInputs = true;
     }
@@ -113,8 +115,7 @@ export class ClassificationComponent implements OnInit {
         this.welcomeTitleChange.emit("You rock! Thanks for the help.");
 
         // restart the component by reinitializing variables and calling the ngOnInit() function again
-        this.init();
-        this.ngOnInit();
+        this.init(this.classifyCount);
     }
 
     removeCharacter(character:string) {
