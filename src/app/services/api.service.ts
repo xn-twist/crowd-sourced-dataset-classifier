@@ -7,18 +7,18 @@ export class ApiService {
     baseApiPath: string;
 
     constructor(private http: Http) {
-        this.baseApiPath = "http://xntwist.tk:5000/";
+        this.baseApiPath = 'http://xntwist.tk:5000/';
     }
 
     getBasicCharacters() {
         /* Get the basic characters from the API. */
-        return this.http.get(this.baseApiPath + "basic_characters")
+        return this.http.get(this.baseApiPath + 'basic_characters')
           .map(response => response.json());
     }
 
     getCharacters() {
         /* Get all, non-basic characters from the API. */
-        return this.http.get(this.baseApiPath + "non_basic_characters")
+        return this.http.get(this.baseApiPath + 'non_basic_characters')
           .map(response => response.json());
     }
 
@@ -27,7 +27,7 @@ export class ApiService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.baseApiPath + "feed", updatedData, options)
+        return this.http.post(this.baseApiPath + 'feed', updatedData, options)
           .map(response => response.json());
     }
 
@@ -36,7 +36,7 @@ export class ApiService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.baseApiPath + "suggested_deprecations", updatedData, options)
+        return this.http.post(this.baseApiPath + 'suggested_deprecations', updatedData, options)
           .map(response => response.json());
     }
 }

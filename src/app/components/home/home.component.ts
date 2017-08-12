@@ -16,7 +16,7 @@ export class HomeComponent {
 
     constructor() {
         this.classifying = false;
-        this.welcomeTitle = "Welcome!";
+        this.welcomeTitle = 'Welcome!';
         this.charsToClassify = 10;
     }
 

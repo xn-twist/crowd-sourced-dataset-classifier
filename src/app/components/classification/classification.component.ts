@@ -55,14 +55,14 @@ export class ClassificationComponent implements OnInit {
     narrowPotentialSpoofs(potentialSpoofs: any) {
         /* Select the potential spoofs which will be shown to the visitor. */
         // get the potential spoof character from the entry in the API
-        for (var i = 0; i < potentialSpoofs._items.length; i++) {
+        for (let i = 0; i < potentialSpoofs._items.length; i++) {
             if (potentialSpoofs._items[i].potential_spoof !== undefined) {
                 this.potentialSpoofs.push(potentialSpoofs._items[i].potential_spoof)
             }
         }
 
         // create a random number from which we will provide characters
-        var seed = Math.floor(Math.random() * (this.potentialSpoofs.length - this.classifyCount));
+        const seed = Math.floor(Math.random() * (this.potentialSpoofs.length - this.classifyCount));
 
         // create a short list of characters that the user can classify
         this.limitedPotentialSpoofs = this.potentialSpoofs.splice(seed, this.classifyCount);
@@ -72,32 +72,32 @@ export class ClassificationComponent implements OnInit {
 
     submitData() {
         /* Pull the content from the form and post it to the feed. */
-        var formData = [];
+        let formData = [];
 
-        var characterLabels = document.getElementsByClassName("character-label");
-        var characterInputs = document.getElementsByClassName("character-input");
+        const characterLabels = document.getElementsByClassName('character-label');
+        const characterInputs = document.getElementsByClassName('character-input');
 
-        for (var i = 0; i < characterInputs.length; ++i) {
+        for (let i = 0; i < characterInputs.length; ++i) {
             // treat the current input field as an HTMLInputElement so we can get the value of it later
             let thisInputField = characterInputs[i] as HTMLInputElement;
 
-            if (thisInputField.value != "") {
+            if (thisInputField.value != '') {
                 // get the value of the input field
                 formData.push({
-                    "character": thisInputField.value,
-                    "spoof": characterLabels[i].innerHTML.replace(": ", "")
+                    'character': thisInputField.value,
+                    'spoof': characterLabels[i].innerHTML.replace(': ', '')
                 });
             }
         }
 
-        var angularApp = this;
+        const angularApp = this;
 
         // keep track of the number of characters this user has classified
         this.totalClassifiedCharactersCount += formData.length;
 
         formData.forEach(function(characterData) {
             angularApp.apiService.sendData(characterData)
-                .subscribe((arg: any) => console.log("Response: ", arg));
+                .subscribe((arg: any) => console.log('Response: ', arg));
         });
 
         // show the next-step buttons
@@ -110,7 +110,7 @@ export class ClassificationComponent implements OnInit {
     classifyAgain() {
         /* Reload the component so the user can start classifying again. */
         // update the welcome title at the top of the home component
-        this.welcomeTitleChange.emit("You rock! Thanks for the help.");
+        this.welcomeTitleChange.emit('You rock! Thanks for the help.');
 
         // restart the component by reinitializing variables and calling the ngOnInit() function again
         this.init(this.classifyCount);
@@ -121,14 +121,14 @@ export class ClassificationComponent implements OnInit {
         // keep track of the number of characters this user has classified
         this.totalClassifiedCharactersCount += 1;
 
-        for (var i = this.limitedPotentialSpoofs.length - 1; i >= 0; i--) {
+        for (let i = this.limitedPotentialSpoofs.length - 1; i >= 0; i--) {
             if (this.limitedPotentialSpoofs[i] == character) {
                 // remove the character from the list of potential spoofs in the UI
                 this.limitedPotentialSpoofs.splice(i, 1);
 
                 // post the character to the API
                 this.apiService.suggestCharacterForDeprectation({'character': character})
-                    .subscribe((arg: any) => console.log("Response: ", arg));
+                    .subscribe((arg: any) => console.log('Response: ', arg));
                 break;
             }
         }
