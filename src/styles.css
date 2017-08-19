@@ -4,6 +4,12 @@ h1 {
   font-size: 250%;
 }
 
+#learn-more-link {
+  position: absolute;
+  top: 3%;
+  right: 3%;
+}
+
 /* Styling for the "want to ride again?" button group. */
 .button-group-option {
   position: relative;
