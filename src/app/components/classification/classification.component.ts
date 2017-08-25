@@ -13,6 +13,7 @@ export class ClassificationComponent implements OnInit {
     potentialSpoofs: string[];
     limitedPotentialSpoofs: string[];
     totalClassifiedCharactersCount: number = 0;
+    userAcronym: string;
     classifyCount: number;
     submitting: boolean;
     apiUnresponsive: boolean;
@@ -20,14 +21,21 @@ export class ClassificationComponent implements OnInit {
     // the two variables below handle the input/output for the welcome message
     @Input() welcomeTitle: string;
     @Output() welcomeTitleChange = new EventEmitter();
+    leaderBoard: any;
 
     constructor(private apiService: ApiService) {
         // initialize the variables
         this.init(10);
+        // get the data from the leader-board
+        this.leaderBoard = this.apiService.getLeaderBoard();
+        console.log(this.leaderBoard);
     }
 
     init(charsToClassify: number) {
         /* Initialize the variables used in this component. This function exists outside of the constructor function because it is called by the `classifyAgain` function if the user decides to classify some more data. */
+        if (this.leaderBoard !== undefined) {
+            this.checkLeaderBoard();
+        }
         this.submitting = false;
         this.potentialSpoofs = [];
         this.showInputs = false;
@@ -50,6 +58,55 @@ export class ClassificationComponent implements OnInit {
               potentialSpoofs => this.narrowPotentialSpoofs(potentialSpoofs),
               (err) => this.apiUnresponsive = true
           );
+    }
+
+    getUserName() {
+        /* Get the user's acronym they would like to use for the leaderboard. */
+        let acronym = prompt("You have a new high score! Please enter your initials:", "AAA");
+        if (acronym == null || acronym == "") {
+            this.userAcronym = "AAA";
+        } else {
+            this.userAcronym =  acronym.slice(0, 3).toUpperCase();
+        }
+    }
+
+    checkLeaderBoard() {
+        /* Check to see how the number of indicators classified so far compares to the leader board. */
+        // sort the leader board in ascending order
+        let sortedLeaderBoard = this.leaderBoard.sort((entryA: any, entryB: any) => {
+            if (entryA.score > entryB.score) return 1;
+            if (entryA.score < entryB.score) return -1;
+            return 0;
+        });
+
+        let leaderBoardChanged = false;
+        let newLeaderBoard = [];
+        // iterate through the leader board to see if the current count is a high score
+        for (var i = sortedLeaderBoard.length - 1; i >= 0; i--) {
+            // if the current score has already been added to the new leaderboard, just add the rest of the entries
+            if (leaderBoardChanged) {
+                newLeaderBoard.push(sortedLeaderBoard[i]);
+            } else {
+                // if the number of characters classified is a high score...
+                if (this.totalClassifiedCharactersCount > sortedLeaderBoard[i].score) {
+                    if (this.userAcronym === undefined) {
+                        // ask for the user's acronym
+                        this.getUserName();
+                    }
+
+                    // add the new entry to the leader board
+                    newLeaderBoard.push({
+                        'name': this.userAcronym,
+                        'score': this.totalClassifiedCharactersCount
+                    });
+                } else {
+                    newLeaderBoard.push(sortedLeaderBoard[i]);
+                }
+            }
+        }
+
+        // TODO: Need to post this to the API once an API branch is up and running (2)
+        this.leaderBoard = newLeaderBoard;
     }
 
     narrowPotentialSpoofs(potentialSpoofs: any) {
