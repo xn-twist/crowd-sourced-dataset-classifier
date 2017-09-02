@@ -10,6 +10,11 @@ h1 {
   right: 3%;
 }
 
+/* Styling for the listed high scores. */
+#stats {
+  font-family: Source Code Pro, monospace;
+}
+
 /* Styling for the "want to ride again?" button group. */
 .button-group-option {
   position: relative;

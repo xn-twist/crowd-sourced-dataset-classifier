@@ -2,7 +2,16 @@
     <h1 id="title">{{ welcomeTitle }}</h1>
 </div>
 
-<div id="stats"><!-- TODO: Add some statistics here --></div>
+<div class="small-3 medium-3 large-3 float-center" *ngIf="classifying != true">
+    Here are the high scores from today:
+    <div id="stats">
+        <ul class="small-3 medium-3 large-3 float-center">
+            <li *ngFor="let score of highScores" style="list-style: none;">{{ score.initials }}: {{score.score}}</li>
+        </ul>
+    </div>
+</div>
+
+<hr>
 
 <div id="content">
     <div id="instructions">
@@ -21,9 +30,6 @@
                     <button type="button" class="button float-center" (click)="startClassifying()">Start protecting the internet</button>
                 </form>
             </div>
-
-            <hr>
-
         </div>
 
         <div id="character-list" *ngIf="classifying">

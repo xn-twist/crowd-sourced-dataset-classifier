@@ -1,23 +1,53 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { ClassificationComponent } from '../classification/classification.component';
+import { ApiService } from '../../services/api.service';
 
 @Component({
     moduleId: module.id,
     selector: 'home',
-    templateUrl: 'home.component.html'
+    templateUrl: 'home.component.html',
+    providers: [ ApiService ]
 })
 export class HomeComponent {
     classifying: boolean;
     charsToClassify: number;
     welcomeTitle: string;
+    highScores: {
+        'initials': string,
+        'score': number
+    }[] = [];
     // this provides access to the classification component which is a child of this component
     @ViewChild(ClassificationComponent) classifier: ClassificationComponent;
 
-    constructor() {
+    constructor(private apiService: ApiService) {
         this.classifying = false;
         this.welcomeTitle = 'Welcome!';
         this.charsToClassify = 10;
+
+        this.apiService.getHighScores()
+            .subscribe(highScores => {
+                // pull the initials and score from the API
+                for (var i = highScores._items.length - 1; i >= 0; i--) {
+                    this.highScores.push({
+                        'initials': highScores._items[i].initials,
+                        'score': highScores._items[i].score
+                    });
+                }
+
+                // sort the high scores
+                this.highScores.sort((a: any, b: any) => {
+                    if (a.score < b.score) {
+                        return 1;
+                    } else if(a.score > b.score) {
+                        return -1;
+                    }
+                    return 0;
+                })
+
+                // only take the top 10 scores
+                this.highScores = this.highScores.slice(0, 10);
+            });
     }
 
     startClassifying() {
