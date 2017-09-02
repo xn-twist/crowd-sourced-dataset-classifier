@@ -22,21 +22,19 @@ export class ApiService {
           .map(response => response.json());
     }
 
-    getLeaderBoard() {
-        /* Get the leader-board from the API. */
-        // TODO: Implement api call for leaderboard once this api endpoint is up and running (2)
-        // return this.http.get(this.baseApiPath + 'leader-board')
-        //   .map(response => response.json());
-        return [{
-            'name': 'AAA',
-            'score': 10
-        }, {
-            'name': 'BBB',
-            'score': 15
-        }, {
-            'name': 'CCC',
-            'score': 16
-        }];
+    getHighScores() {
+        /* Get the high scores from the API. */
+        return this.http.get(this.baseApiPath + 'high_scores')
+          .map(response => response.json());
+    }
+
+    updateHighScores(newHighScores: any) {
+        /* Update the high scores on the API. */
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.baseApiPath + 'high_scores', newHighScores, options)
+          .map(response => response.json());
     }
 
     sendData(updatedData: any) {

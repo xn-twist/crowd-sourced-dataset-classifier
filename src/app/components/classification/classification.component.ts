@@ -21,14 +21,20 @@ export class ClassificationComponent implements OnInit {
     // the two variables below handle the input/output for the welcome message
     @Input() welcomeTitle: string;
     @Output() welcomeTitleChange = new EventEmitter();
-    leaderBoard: any;
+    leaderBoard: any[] = [];
 
     constructor(private apiService: ApiService) {
         // initialize the variables
         this.init(10);
         // get the data from the leader-board
-        this.leaderBoard = this.apiService.getLeaderBoard();
-        console.log(this.leaderBoard);
+        // this.leaderBoard = this.apiService.getHighScores();
+        this.apiService.getHighScores()
+            .subscribe(highScores => { for (var i = highScores._items.length - 1; i >= 0; i--) {
+                this.leaderBoard.push({
+                    'initials': highScores._items[i].initials,
+                    'score': highScores._items[i].score
+                });
+            }});
     }
 
     init(charsToClassify: number) {
@@ -62,7 +68,7 @@ export class ClassificationComponent implements OnInit {
 
     getUserName() {
         /* Get the user's acronym they would like to use for the leaderboard. */
-        let acronym = prompt("You have a new high score! Please enter your initials:", "AAA");
+        let acronym = prompt("You have a score high enough for the score board! Please enter your initials: ", "AAA");
         if (acronym == null || acronym == "") {
             this.userAcronym = "AAA";
         } else {
@@ -72,41 +78,33 @@ export class ClassificationComponent implements OnInit {
 
     checkLeaderBoard() {
         /* Check to see how the number of indicators classified so far compares to the leader board. */
-        // sort the leader board in ascending order
-        let sortedLeaderBoard = this.leaderBoard.sort((entryA: any, entryB: any) => {
-            if (entryA.score > entryB.score) return 1;
-            if (entryA.score < entryB.score) return -1;
-            return 0;
-        });
-
-        let leaderBoardChanged = false;
-        let newLeaderBoard = [];
+        let newLeaderBoardEntry = undefined;
         // iterate through the leader board to see if the current count is a high score
-        for (var i = sortedLeaderBoard.length - 1; i >= 0; i--) {
-            // if the current score has already been added to the new leaderboard, just add the rest of the entries
-            if (leaderBoardChanged) {
-                newLeaderBoard.push(sortedLeaderBoard[i]);
-            } else {
-                // if the number of characters classified is a high score...
-                if (this.totalClassifiedCharactersCount > sortedLeaderBoard[i].score) {
-                    if (this.userAcronym === undefined) {
-                        // ask for the user's acronym
-                        this.getUserName();
-                    }
-
-                    // add the new entry to the leader board
-                    newLeaderBoard.push({
-                        'name': this.userAcronym,
-                        'score': this.totalClassifiedCharactersCount
-                    });
-                } else {
-                    newLeaderBoard.push(sortedLeaderBoard[i]);
+        for (var i = this.leaderBoard.length - 1; i >= 0; i--) {
+            if (this.totalClassifiedCharactersCount > this.leaderBoard[i].score) {
+                if (this.userAcronym === undefined) {
+                    // ask for the user's acronym
+                    this.getUserName();
                 }
+
+                // add the new entry to the leader board
+                newLeaderBoardEntry = {
+                    'initials': this.userAcronym,
+                    'score': this.totalClassifiedCharactersCount
+                };
+
+                // update the local copy of the high scores
+                this.leaderBoard.push(newLeaderBoardEntry);
+                break;
             }
         }
 
-        // TODO: Need to post this to the API once an API branch is up and running (2)
-        this.leaderBoard = newLeaderBoard;
+        if (newLeaderBoardEntry !== undefined) {
+            // update the high scores in the api
+            // this.apiService.updateHighScores(this.leaderBoard);
+            this.apiService.updateHighScores(newLeaderBoardEntry)
+                .subscribe(arg => console.log("updated high scores: ", arg));
+        }
     }
 
     narrowPotentialSpoofs(potentialSpoofs: any) {
