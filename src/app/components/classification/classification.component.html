@@ -14,7 +14,7 @@
                 <label class="character-label">{{ potentialSpoof }}: </label>
             </div>
             <div class="columns small-9 medium-9 large-9">
-                <input class="character-input" type="text" maxlength="1"/>
+                <input class="character-input" type="text" maxlength="2"/>
             </div>
             <div class="columns small-2 medium-2 large-2">
                 <button type="button" class="alert button has-tip" (click)="removeCharacter(potentialSpoof)" data-tooltip aria-haspopup="true" data-disable-hover='false' title="Click here to suggest that this character be removed from the list of potential spoof characters." tabindex="-1"><i class="fi-trash"></i></button>
@@ -22,7 +22,7 @@
         </div>
 
         <div class="small-7 medium-7 large-7 float-center">
-            <button type="button" class="button" (click)="submitData()" style="margin: 0 auto;">Submit!</button>
+            <button type="button" class="button" (click)="submitData()" style="margin: 0 auto;">Submit</button>
         </div>
     </div>
 </div>
