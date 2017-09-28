@@ -3,7 +3,7 @@
 </div>
 
 <div class="small-3 medium-3 large-3 float-center" *ngIf="classifying != true">
-    Here are the high scores from today:
+    <h5 class="float-center">Here are the high scores from today:</h5>
     <div id="stats">
         <ul class="small-3 medium-3 large-3 float-center">
             <li *ngFor="let score of highScores" style="list-style: none;">{{ score.initials }}: {{score.score}}</li>
@@ -20,15 +20,8 @@
 
     <div id="classifications">
         <div *ngIf="classifying != true">
-            <div id="initial-selection" class="card-divider small-3 medium-3 large-3 float-center">
-                <form>
-                    <label>
-                        How many characters would you like to classify?
-                        <input id="classification-count" (ngModel)="charsToClassify" type="number" value="10" min="1" max="50" required pattern="integer">
-                    </label>
-
-                    <button type="button" class="button float-center" (click)="startClassifying()">Start Classifying!</button>
-                </form>
+            <div id="initial-selection" class="small-3 medium-3 large-3 float-center">
+                <button type="button" class="button float-center" (click)="startClassifying()">Start Classifying Characters!</button>
             </div>
         </div>
 
