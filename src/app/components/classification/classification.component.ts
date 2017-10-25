@@ -139,7 +139,7 @@ export class ClassificationComponent implements OnInit {
             if (thisInputField.value !== '') {
                 // get the value of the input field
                 formData.push({
-                    'character': thisInputField.value,
+                    'character': thisInputField.value.toLowerCase(),
                     'spoof': characterLabels[i].innerHTML.replace(': ', '')
                 });
             }
