@@ -11,13 +11,13 @@
     <div class="small-12 medium-10 large-8 float-center">
         <div class="row small-11 medium-9 large-7 potential-spoof-row" *ngFor="let potentialSpoof of limitedPotentialSpoofs">
             <div class="columns small-1 medium-1 large-1 potential-spoof">
-                <label class="character-label">{{ potentialSpoof }}: </label>
+                <label class="character-label">{{ potentialSpoof }} </label>
             </div>
             <div class="columns small-9 medium-9 large-9">
                 <input class="character-input" type="text" maxlength="2"/>
             </div>
             <div class="columns small-2 medium-2 large-2">
-                <button type="button" class="alert button has-tip" (click)="removeCharacter(potentialSpoof)" data-tooltip aria-haspopup="true" data-disable-hover='false' title="Click here to suggest that this character be removed from the list of potential spoof characters." tabindex="-1"><i class="fi-trash"></i></button>
+                <button type="button" class="alert button has-tip" (click)="removeCharacter(potentialSpoof)" data-tooltip aria-haspopup="true" data-disable-hover='false' title="If this character doesn't look like an ascii character, click here to suggest that is be removed from the dataset." tabindex="-1"><i class="fi-trash"></i></button>
             </div>
         </div>
 
