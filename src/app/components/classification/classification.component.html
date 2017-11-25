@@ -8,7 +8,7 @@
 
 <!-- If the API is accessible, show characters to the user. -->
 <div *ngIf=showInputs>
-    <div class="small-12 medium-10 large-8 float-center">
+    <div id="chars" class="small-12 medium-10 large-8 float-center">
         <div class="row small-11 medium-9 large-7 potential-spoof-row" *ngFor="let potentialSpoof of limitedPotentialSpoofs">
             <div class="columns small-1 medium-1 large-1 potential-spoof">
                 <label class="character-label">{{ potentialSpoof }}</label>
@@ -22,7 +22,7 @@
         </div>
 
         <div class="small-7 medium-7 large-7 float-center">
-            <button type="button" class="button" (click)="submitData()" style="margin: 0 auto;">Submit</button>
+            <button id="characterSubmit" type="button" class="button" (click)="submitData()" style="margin: 0 auto;">Submit</button>
         </div>
     </div>
 </div>
