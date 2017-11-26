@@ -130,8 +130,8 @@ export class ClassificationComponent implements OnInit {
         /* Pull the content from the form and post it to the feed. */
         let formData = [];
 
-        const characterLabels = document.getElementsByClassName('character-label');
-        const characterInputs = document.getElementsByClassName('character-input');
+        const characterLabels = document.getElementsByClassName('characterLabel');
+        const characterInputs = document.getElementsByClassName('characterInput');
 
         for (let i = 0; i < characterInputs.length; ++i) {
             // treat the current input field as an HTMLInputElement so we can get the value of it later
