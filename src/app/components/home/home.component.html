@@ -2,13 +2,12 @@
     <h1 id="title">{{ welcomeTitle }}</h1>
 </div>
 
-<div class="small-12 medium-6 large-3 float-center" *ngIf="classifying != true">
-    <h5 class="float-center">Here are the high scores from today:</h5>
-    <div id="stats">
-        <ul class="small-12 medium-6 large-3 float-center">
-            <li *ngFor="let score of highScores" style="list-style: none;">{{ score.initials }}: {{score.score}}</li>
-        </ul>
-    </div>
+<div id="highScores" class="small-12 medium-8 large-6 float-center" *ngIf="classifying != true">
+    <br>
+    <h5>Here are the high scores from today:</h5>
+    <ul>
+        <li *ngFor="let score of highScores" class="highScore" style="list-style: none;">{{ score.initials }}: {{score.score}}</li>
+    </ul>
 </div>
 
 <div id="content">
@@ -18,8 +17,9 @@
 
     <div id="classifications">
         <div *ngIf="classifying != true">
+            <br>
             <div id="initial-selection" class="small-3 medium-3 large-3 float-center">
-                <button type="button" class="button float-center" (click)="startClassifying()">Start Classifying Characters!</button>
+                <button type="button" class="button float-center" (click)="startClassifying()">Help Us Classify Characters</button>
             </div>
         </div>
 

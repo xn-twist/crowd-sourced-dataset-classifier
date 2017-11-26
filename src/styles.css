@@ -11,8 +11,12 @@ h1 {
 }
 
 /* Styling for the listed high scores. */
-#stats {
+.highScore {
   font-family: Source Code Pro, monospace;
+}
+
+#highScores {
+  text-align: center;
 }
 
 /* Styling for the "want to ride again?" button group. */
