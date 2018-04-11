@@ -191,37 +191,7 @@ export class ClassificationComponent implements OnInit {
     }
 
     startTour() {
-        const IntroJs = require('../../../../node_modules/intro.js/intro.js');
-        let intro = IntroJs();
-        // Initialize steps
-        intro.setOptions({
-            steps: [
-                {
-                    // element: document.querySelectorAll('#classificationMain')[0],
-                    intro: "The goal is to identify non-Latin characters that could easily be mistaken for standard, Latin characters; these characters could be used to register domains targeting a specific organization.",
-                    position: 'left'
-                }, {
-                    element: document.querySelectorAll('.potentialSpoof')[0],
-                    intro: "This is a character that is not part of the standard, Latin character set. This character could be used to create spoofed websites targeting organizations.",
-                    position: 'left'
-                }, {
-                    element: document.querySelectorAll('.characterInput')[0],
-                    intro: " If the character to the left can be mistaken for a Latin character, type the Latin character here.",
-                    position: 'right'
-                }, {
-                    element: document.querySelectorAll('.characterDeprecate')[0],
-                    intro: "If there is very little chance of the non-Latin character on the left being mistaken for a Latin character, click this button to suggest that the character be deleted.",
-                    position: 'right'
-                }, {
-                    element: '#characterSubmit',
-                    intro: "When you're done, submit the results. Thank you!",
-                    position: 'right'
-                }
-            ]
-        });
-
-        // Start tutorial
-        intro.start();
-        this.tourTaken = true;
+        alert("The goal is to identify non-ASCII characters that could easily be mistaken for ASCII characters; these characters could be used to register domains targeting a specific organization.");
+        alert("If a non-ASCII character on the left can be mistaken for an ASCII character, type the ASCII character in the text field beside that character.\n\nIf there is very little chance of the non-Latin character on the left being mistaken for a Latin character, click the trash can to suggest that the character be removed.\n\nWhen you're done, submit our input. Thanks!!!");
     }
 }

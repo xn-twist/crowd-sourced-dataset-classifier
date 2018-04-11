@@ -8,8 +8,18 @@ import { HomeComponent } from './components/home/home.component';
 import { ClassificationComponent } from './components/classification/classification.component';
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule, HttpModule ],
-  declarations: [ AppComponent, HomeComponent, ClassificationComponent ],
-  bootstrap:    [ AppComponent ]
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule
+  ],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    ClassificationComponent
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

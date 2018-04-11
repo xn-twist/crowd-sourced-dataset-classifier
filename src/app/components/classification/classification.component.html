@@ -9,7 +9,7 @@
 <!-- If the API is accessible, show characters to the user. -->
 <div id="classificationMain" *ngIf=showInputs>
     <a href="#" (click)="startTour()" *ngIf="!tourTaken">Take a Tour</a>
-    <br>
+    <br><br>
     <div class="small-12 medium-10 large-8 float-center">
         <div id="characters" class="row small-11 medium-9 large-7 potential-spoof-row" *ngFor="let potentialSpoof of limitedPotentialSpoofs">
             <div class="columns small-1 medium-1 large-1 potentialSpoof">
