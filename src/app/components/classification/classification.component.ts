@@ -3,7 +3,6 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 
 @Component({
-    moduleId: module.id,
     selector: 'classification',
     templateUrl: 'classification.component.html',
     providers: [ ApiService ]

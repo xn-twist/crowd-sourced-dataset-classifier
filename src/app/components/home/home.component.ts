@@ -4,7 +4,6 @@ import { ClassificationComponent } from '../classification/classification.compon
 import { ApiService } from '../../services/api.service';
 
 @Component({
-    moduleId: module.id,
     selector: 'home',
     templateUrl: 'home.component.html',
     providers: [ ApiService ]
