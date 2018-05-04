@@ -7,7 +7,7 @@ export class ApiService {
     baseApiPath: string;
 
     constructor(private http: Http) {
-        this.baseApiPath = 'https://xntwist.tk:2053/';
+        this.baseApiPath = 'https://xntwist.hightower.space:2053/';
     }
 
     getBasicCharacters() {
