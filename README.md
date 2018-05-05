@@ -4,7 +4,7 @@
 
 *Because 30 seconds can make the internet a much safer place.*
 
-The goal of this project is to make it quick and easy to create datasets for [XN-Twist](https://github.com/fhightower/xn_twist). These datasets can then be used to give organizations around the world (many of which cannot afford large security teams) more visibility into potential threats.
+The goal of this project is to make it quick and easy to create datasets for [XN-Twist](https://github.com/xn-twist/xn-twist). These datasets can then be used to give organizations around the world (many of which cannot afford large security teams) more visibility into potential threats.
 
 ![XN-Twist Layout](_images/xn-twist-layout.png?raw=true "XN-Twist Layout")
 
