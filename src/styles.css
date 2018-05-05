@@ -1,7 +1,15 @@
-#learn-more-link {
+.bottom-bar {
   position: absolute;
-  top: 3%;
-  right: 3%;
+  bottom: 1%;
+  right: 1%;
+}
+
+@media screen and (max-width: 479px) {
+   .mobile-hide{ display: none !important; }
+}
+
+a {
+  text-decoration: underline;
 }
 
 /* Styling for the listed high scores. */
